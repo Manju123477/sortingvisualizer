@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SortLab | Sorting Algorithm Visualizer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-mark">▥</span>
+      <span>
+        <strong>SortLab</strong>
+        <small>Sorting Algorithm Visualizer</small>
+      </span>
+    </a>
+    <div class="top-note">Explore algorithms • Learn by watching</div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel controls">
+      <div class="panel-heading">
+        <span class="eyebrow">WORKSPACE</span>
+        <h2>Controls</h2>
+      </div>
+
+      <label class="field-label" for="algorithm">Algorithm</label>
+      <select id="algorithm">
+        <option value="bubble">Bubble Sort</option>
+        <option value="selection">Selection Sort</option>
+        <option value="insertion">Insertion Sort</option>
+        <option value="merge">Merge Sort</option>
+        <option value="quick">Quick Sort</option>
+        <option value="heap">Heap Sort</option>
+        <option value="shell">Shell Sort</option>
+      </select>
+
+      <div class="range-heading">
+        <label for="arraySize">Array size</label>
+        <output id="sizeValue">30</output>
+      </div>
+      <input id="arraySize" type="range" min="8" max="80" value="30">
+      
+<div class="range-heading">
+  <label for="arraySize">Array size</label>
+  <output id="sizeValue">30</output>
+</div>
+
+<input id="arraySize" type="range" min="8" max="80" value="30">
+
+<!-- PASTE THE NEW CUSTOM ARRAY CODE HERE -->
+
+<div class="range-heading">
+  <label for="customArray">Custom Array (Optional)</label>
+</div>
+
+<textarea
+  id="customArray"
+  rows="3"
+  placeholder="Leave empty for random array, or enter: 45, 12, 78, 23, 9"
+  style="width:100%; padding:10px; background:#102640;
+  color:#edf4ff; border:1px solid #2a476b;
+  border-radius:9px; resize:vertical;"
+></textarea>
+
+<button id="applyArrayBtn" class="btn secondary"
+        style="width:100%; margin-top:8px;">
+  Apply Custom Array
+</button>
+
+<p id="arrayInputMessage"
+   style="font-size:12px; color:#91a8c8; margin-top:8px;">
+  A random array is loaded by default.
+</p>
+
+<!-- YOUR EXISTING ANIMATION SPEED SECTION CONTINUES BELOW -->
+
+      <div class="range-heading">
+        <label for="speed">Animation speed</label>
+        <output id="speedValue">Normal</output>
+      </div>
+      <input id="speed" type="range" min="1" max="5" value="3">
+      <div class="range-ends"><span>Slow</span><span>Fast</span></div>
+
+      <div class="button-stack">
+        <button id="startBtn" class="btn primary">▶ Start</button>
+        <div class="button-row">
+          <button id="pauseBtn" class="btn secondary" disabled>Ⅱ Pause</button>
+          <button id="stepBtn" class="btn secondary">Step →</button>
+        </div>
+        <button id="resetBtn" class="btn secondary">↺ Reset</button>
+        <button id="newArrayBtn" class="btn secondary">⤨ New array</button>
+      </div>
+
+      <div class="hint">
+        <span class="hint-icon">i</span>
+        <p>Tip: use Step to inspect each comparison or movement.</p>
+      </div>
+    </aside>
+
+    <section class="main-content">
+      <section class="panel visual-panel">
+        <div class="visual-heading">
+          <div>
+            <span class="eyebrow">LIVE VISUALIZATION</span>
+            <h1 id="algorithmTitle">Bubble Sort</h1>
+          </div>
+          <div class="legend">
+            <span><i class="dot compare"></i> Comparing</span>
+            <span><i class="dot swap"></i> Swapping</span>
+            <span><i class="dot sorted"></i> Sorted</span>
+          </div>
+        </div>
+
+        <div id="chart" class="chart"
+             role="img" aria-label="Sorting animation"></div>
+
+        <div class="chart-footer">
+          <span id="statusText">Ready to sort</span>
+          <span id="progressText">0 / 0 operations</span>
+        </div>
+      </section>
+      
+      <div class="live-explanation" aria-live="polite">
+        <div class="explanation-icon">💡</div>
+        <div class="explanation-content">
+          <span class="eyebrow">LIVE STEP EXPLANATION</span>
+          <h2 id="liveStepTitle">Ready to explore?</h2>
+          <p id="liveStepExplanation">
+            Press Start or Step to see what the algorithm is doing
+            and why each operation happens.
+          </p>
+        </div>
+      </div>
+
+      <section class="stats-grid">
+        <article class="panel stat-card">
+          <span class="stat-label">Comparisons</span>
+          <strong id="comparisons">0</strong>
+          <span class="stat-foot">Element checks</span>
+        </article>
+        <article class="panel stat-card">
+          <span class="stat-label">Swaps / Moves</span>
+          <strong id="swaps">0</strong>
+          <span class="stat-foot">Array changes</span>
+        </article>
+        <article class="panel stat-card">
+          <span class="stat-label">Elapsed time</span>
+          <strong id="elapsed">0.0s</strong>
+          <span class="stat-foot">Playback time</span>
+        </article>
+      </section>
+
+      <section class="info-grid">
+        <article class="panel info-card">
+          <span class="eyebrow">HOW IT WORKS</span>
+          <h2 id="aboutTitle">What is Bubble Sort?</h2>
+          <p id="description">
+            Bubble Sort compares adjacent elements and swaps them
+            when they are in the wrong order.
+          </p>
+
+          <div class="complexity">
+            <div><span>Best time</span><b id="bestTime">O(n)</b></div>
+            <div><span>Average time</span><b id="avgTime">O(n²)</b></div>
+            <div><span>Worst time</span><b id="worstTime">O(n²)</b></div>
+            <div><span>Space</span><b id="spaceTime">O(1)</b></div>
+          </div>
+        </article>
+
+        <article class="panel info-card step-card">
+          <span class="eyebrow">LEARN STEP BY STEP</span>
+          <h2>Current step</h2>
+          <p id="stepDescription">
+            Press Start or Step to see the algorithm in action.
+          </p>
+
+          <div class="array-preview">
+            <span class="eyebrow">ARRAY VALUES</span>
+            <div id="arrayValues">—</div>
+          </div>
+        </article>
+      </section>
+
+      <footer>
+        SortLab · Built with HTML, CSS and JavaScript
+      </footer>
+    </section>
+  </main>
+
+  <script src="js/algorithms.js"></script>
+  <script src="js/visualizer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
